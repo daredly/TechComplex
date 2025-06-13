@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Адаптивный дизайн - TechComplex</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .responsive-demo {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .device-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .device {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            background: #fff;
+        }
+
+        .device-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .device-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .device-title {
+            font-size: 1.2em;
+            color: #2C3E50;
+        }
+
+        .device-content {
+            background: #f8f9fa;
+            border-radius: 4px;
+            padding: 15px;
+        }
+
+        .responsive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .grid-item {
+            background: #3498DB;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .responsive-text {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #2C3E50;
+        }
+
+        .responsive-image {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+
+        .responsive-menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .menu-item {
+            background: #2C3E50;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .responsive-menu {
+                flex-direction: column;
+            }
+            
+            .menu-item {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .device-content {
+                padding: 10px;
+            }
+            
+            .responsive-text {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="responsive-demo">
+        <h1>Адаптивный дизайн</h1>
+        
+        <div class="device-showcase">
+            <!-- Десктопная версия -->
+            <div class="device">
+                <div class="device-header">
+                    <svg class="device-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                        <line x1="8" y1="21" x2="16" y2="21"></line>
+                        <line x1="12" y1="17" x2="12" y2="21"></line>
+                    </svg>
+                    <h3 class="device-title">Десктоп (1200px)</h3>
+                </div>
+                <div class="device-content">
+                    <nav class="responsive-menu">
+                        <a href="#" class="menu-item">Главная</a>
+                        <a href="#" class="menu-item">Услуги</a>
+                        <a href="#" class="menu-item">О нас</a>
+                        <a href="#" class="menu-item">Контакты</a>
+                    </nav>
+                    <div class="responsive-grid">
+                        <div class="grid-item">Блок 1</div>
+                        <div class="grid-item">Блок 2</div>
+                        <div class="grid-item">Блок 3</div>
+                        <div class="grid-item">Блок 4</div>
+                    </div>
+                    <p class="responsive-text">
+                        Пример текста для десктопной версии. Здесь может быть размещен любой контент, который будет адаптироваться под размер экрана.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Планшетная версия -->
+            <div class="device">
+                <div class="device-header">
+                    <svg class="device-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                        <line x1="12" y1="18" x2="12" y2="18"></line>
+                    </svg>
+                    <h3 class="device-title">Планшет (768px)</h3>
+                </div>
+                <div class="device-content">
+                    <nav class="responsive-menu">
+                        <a href="#" class="menu-item">Главная</a>
+                        <a href="#" class="menu-item">Услуги</a>
+                        <a href="#" class="menu-item">О нас</a>
+                        <a href="#" class="menu-item">Контакты</a>
+                    </nav>
+                    <div class="responsive-grid">
+                        <div class="grid-item">Блок 1</div>
+                        <div class="grid-item">Блок 2</div>
+                        <div class="grid-item">Блок 3</div>
+                        <div class="grid-item">Блок 4</div>
+                    </div>
+                    <p class="responsive-text">
+                        Пример текста для планшетной версии. Контент адаптируется под размер экрана планшета.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Мобильная версия -->
+            <div class="device">
+                <div class="device-header">
+                    <svg class="device-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                        <line x1="12" y1="18" x2="12" y2="18"></line>
+                    </svg>
+                    <h3 class="device-title">Мобильный (480px)</h3>
+                </div>
+                <div class="device-content">
+                    <nav class="responsive-menu">
+                        <a href="#" class="menu-item">Главная</a>
+                        <a href="#" class="menu-item">Услуги</a>
+                        <a href="#" class="menu-item">О нас</a>
+                        <a href="#" class="menu-item">Контакты</a>
+                    </nav>
+                    <div class="responsive-grid">
+                        <div class="grid-item">Блок 1</div>
+                        <div class="grid-item">Блок 2</div>
+                        <div class="grid-item">Блок 3</div>
+                        <div class="grid-item">Блок 4</div>
+                    </div>
+                    <p class="responsive-text">
+                        Пример текста для мобильной версии. Контент адаптируется под размер экрана смартфона.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

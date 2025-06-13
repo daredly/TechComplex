@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Услуги - TechComplex</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">TechComplex</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="about.html">О нас</a></li>
+                <li><a href="services.html" class="active">Услуги</a></li>
+                <li><a href="order.html">Заказать услугу</a></li>
+                <li><a href="#" class="contact-btn">Связаться с нами</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="services-page">
+            <div class="services-page-header">
+                <h1>Наши услуги</h1>
+                <p>Комплексные технологические решения для вашего бизнеса</p>
+            </div>
+
+            <div class="services-content">
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">💻</div>
+                        <h3>Разработка ПО</h3>
+                        <p>Создание современных программных решений для автоматизации бизнес-процессов</p>
+                        <ul class="service-features">
+                            <li>Веб-приложения</li>
+                            <li>Мобильные приложения</li>
+                            <li>Корпоративные системы</li>
+                            <li>API интеграции</li>
+                        </ul>
+                        <a href="order.html" class="service-button">Заказать</a>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">📊</div>
+                        <h3>Технологический консалтинг</h3>
+                        <p>Профессиональные консультации по внедрению и оптимизации технологий</p>
+                        <ul class="service-features">
+                            <li>Аудит IT-инфраструктуры</li>
+                            <li>Стратегическое планирование</li>
+                            <li>Оптимизация процессов</li>
+                            <li>Техническая экспертиза</li>
+                        </ul>
+                        <a href="order.html" class="service-button">Заказать</a>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">🔄</div>
+                        <h3>Интеграция систем</h3>
+                        <p>Объединение различных систем в единую экосистему</p>
+                        <ul class="service-features">
+                            <li>Интеграция CRM и ERP</li>
+                            <li>API интеграции</li>
+                            <li>Миграция данных</li>
+                            <li>Автоматизация процессов</li>
+                        </ul>
+                        <a href="order.html" class="service-button">Заказать</a>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">☁️</div>
+                        <h3>Облачные решения</h3>
+                        <p>Внедрение и настройка облачной инфраструктуры</p>
+                        <ul class="service-features">
+                            <li>Облачная миграция</li>
+                            <li>DevOps практики</li>
+                            <li>Масштабирование</li>
+                            <li>Безопасность</li>
+                        </ul>
+                        <a href="order.html" class="service-button">Заказать</a>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">🤖</div>
+                        <h3>AI решения</h3>
+                        <p>Внедрение искусственного интеллекта в ваш бизнес</p>
+                        <ul class="service-features">
+                            <li>Машинное обучение</li>
+                            <li>Анализ данных</li>
+                            <li>Автоматизация</li>
+                            <li>Предиктивная аналитика</li>
+                        </ul>
+                        <a href="order.html" class="service-button">Заказать</a>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">🔒</div>
+                        <h3>Кибербезопасность</h3>
+                        <p>Защита вашего бизнеса от киберугроз</p>
+                        <ul class="service-features">
+                            <li>Аудит безопасности</li>
+                            <li>Защита данных</li>
+                            <li>Мониторинг угроз</li>
+                            <li>Обучение персонала</li>
+                        </ul>
+                        <a href="order.html" class="service-button">Заказать</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Свяжитесь с нами</h2>
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <input type="text" id="contactName" name="name" required placeholder="Имя *">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="contactSurname" name="surname" required placeholder="Фамилия *">
+                </div>
+                <div class="form-group">
+                    <input type="email" id="contactEmail" name="email" required placeholder="Email *">
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="contactPhone" name="phone" required placeholder="Телефон *" pattern="[0-9+]+" maxlength="15">
+                </div>
+                <div class="form-group">
+                    <textarea id="contactMessage" name="message" required placeholder="Сообщение *"></textarea>
+                </div>
+                <button type="submit" class="btn">Отправить</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-info">
+                <h3>TechComplex</h3>
+                <p>Инновационные решения для вашего бизнеса</p>
+            </div>
+            <div class="footer-links">
+                <a href="#privacy">Политика конфиденциальности</a>
+                <a href="#terms">Условия использования</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 TechComplex. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Обработка формы обратной связи
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('contactName').value,
+                surname: document.getElementById('contactSurname').value,
+                email: document.getElementById('contactEmail').value,
+                phone: document.getElementById('contactPhone').value,
+                message: document.getElementById('contactMessage').value
+            };
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    alert('Сообщение успешно отправлено!');
+                    this.reset();
+                    closeModal();
+                } else {
+                    throw new Error('Ошибка при отправке сообщения');
+                }
+            } catch (error) {
+                alert('Произошла ошибка при отправке сообщения. Пожалуйста, попробуйте позже.');
+                console.error('Error:', error);
+            }
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заказать услугу - TechComplex</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">TechComplex</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="about.html">О нас</a></li>
+                <li><a href="services.html">Услуги</a></li>
+                <li><a href="order.html" class="active">Заказать услугу</a></li>
+                <li><a href="#" class="contact-btn">Связаться с нами</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="order-page">
+            <div class="order-page-header">
+                <h1>Заказать услугу</h1>
+                <p>Выберите нужную услугу и заполните форму заявки</p>
+            </div>
+            <div class="order-container">
+                <div class="order-info">
+                    <h3>Наши услуги</h3>
+                    <div class="services-list">
+                        <div class="service-item">
+                            <h4>Разработка ПО</h4>
+                            <p>Создание современных программных решений для вашего бизнеса</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>Технологический консалтинг</h4>
+                            <p>Профессиональные консультации по внедрению технологий</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>Интеграция систем</h4>
+                            <p>Объединение различных систем в единую экосистему</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>Облачные решения</h4>
+                            <p>Внедрение и настройка облачной инфраструктуры</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>AI решения</h4>
+                            <p>Внедрение искусственного интеллекта в ваш бизнес</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="order-form" id="orderForm">
+                    <h3>Форма заявки</h3>
+                    <div class="form-group">
+                        <label for="service">Выберите услугу:</label>
+                        <select id="service" required>
+                            <option value="">Выберите услугу</option>
+                            <option value="development">Разработка ПО</option>
+                            <option value="consulting">Технологический консалтинг</option>
+                            <option value="integration">Интеграция систем</option>
+                            <option value="cloud">Облачные решения</option>
+                            <option value="ai">AI решения</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Имя *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="surname">Фамилия *</label>
+                        <input type="text" id="surname" name="surname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Компания:</label>
+                        <input type="text" id="company">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон *</label>
+                        <input type="tel" id="phone" name="phone" pattern="[0-9+]+" title="Введите только цифры и символ +" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Описание проекта:</label>
+                        <textarea id="description" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="order-button">Отправить заявку</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Свяжитесь с нами</h2>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="contact-name">Ваше имя:</label>
+                    <input type="text" id="contact-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact-email">Email:</label>
+                    <input type="email" id="contact-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact-message">Сообщение:</label>
+                    <textarea id="contact-message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="contact-button">Отправить</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-info">
+                <h3>TechComplex</h3>
+                <p>Инновационные решения для вашего бизнеса</p>
+            </div>
+            <div class="footer-links">
+                <a href="#privacy">Политика конфиденциальности</a>
+                <a href="#terms">Условия использования</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 TechComplex. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Обработка формы заказа
+        document.getElementById('orderForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const formData = {
+                name: document.getElementById('name').value,
+                surname: document.getElementById('surname').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                service: document.getElementById('service').value,
+                message: document.getElementById('description').value,
+                company: document.getElementById('company').value
+            };
+
+            try {
+                const response = await fetch('/api/orders', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert('Спасибо за ваш заказ! Мы свяжемся с вами в ближайшее время.');
+                    this.reset();
+                } else {
+                    alert('Произошла ошибка при отправке заказа. Пожалуйста, попробуйте позже.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Произошла ошибка при отправке заказа. Пожалуйста, попробуйте позже.');
+            }
+        });
+
+        // Обработка формы "Связаться с нами"
+        document.querySelector('.contact-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const formData = {
+                name: document.getElementById('contact-name').value,
+                email: document.getElementById('contact-email').value,
+                message: document.getElementById('contact-message').value
+            };
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (data.message === 'Message sent successfully') {
+                    alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
+                    this.reset();
+                    document.getElementById('contactModal').style.display = 'none';
+                } else {
+                    alert('Произошла ошибка при отправке сообщения. Пожалуйста, попробуйте позже.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Произошла ошибка при отправке сообщения. Пожалуйста, попробуйте позже.');
+            }
+        });
+
+        // Валидация телефона
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/[^\d+]/g, '');
+            
+            if (value.indexOf('+') > 0) {
+                value = value.replace(/\+/g, '');
+                if (value.length > 0) {
+                    value = '+' + value;
+                }
+            }
+            
+            if (value.length > 15) {
+                value = value.slice(0, 15);
+            }
+            
+            e.target.value = value;
+        });
+
+        // Модальное окно
+        const modal = document.getElementById('contactModal');
+        const contactBtn = document.querySelector('.contact-btn');
+        const closeBtn = document.querySelector('.close-modal');
+
+        contactBtn.onclick = function() {
+            modal.style.display = 'block';
+        }
+
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html> 

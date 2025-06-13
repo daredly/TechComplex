@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Навигационная структура - TechComplex</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .navigation-demo {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .nav-header {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-title {
+            font-size: 24px;
+            color: #2C3E50;
+            margin-bottom: 20px;
+        }
+
+        .nav-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .nav-structure {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .nav-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 1.2em;
+            color: #2C3E50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498DB;
+        }
+
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-item {
+            margin-bottom: 10px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            color: #2C3E50;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            background: #f8f9fa;
+        }
+
+        .nav-link.active {
+            background: #3498DB;
+            color: white;
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sub-nav {
+            list-style: none;
+            padding-left: 30px;
+            margin-top: 5px;
+        }
+
+        .sub-nav-item {
+            margin-bottom: 5px;
+        }
+
+        .sub-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            border-radius: 4px;
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+
+        .sub-nav-link:hover {
+            background: #f8f9fa;
+            color: #2C3E50;
+        }
+
+        .nav-visual {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .visual-title {
+            font-size: 1.2em;
+            color: #2C3E50;
+            margin-bottom: 20px;
+        }
+
+        .visual-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            padding: 20px;
+        }
+
+        .tree-structure {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .tree-node {
+            background: #3498DB;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            margin: 5px;
+            text-align: center;
+        }
+
+        .tree-branch {
+            display: flex;
+            gap: 20px;
+            margin: 10px 0;
+        }
+
+        .tree-subnode {
+            background: #95a5a6;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="navigation-demo">
+        <div class="nav-header">
+            <h1 class="nav-title">Навигационная структура сайта</h1>
+            <p class="nav-description">
+                Основные разделы и подразделы сайта, обеспечивающие удобную навигацию для пользователей
+            </p>
+        </div>
+
+        <div class="nav-structure">
+            <div class="nav-section">
+                <h2 class="section-title">Главное меню</h2>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active">
+                            <span class="nav-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                </svg>
+                            </span>
+                            Главная
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <span class="nav-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                            </span>
+                            О компании
+                        </a>
+                        <ul class="sub-nav">
+                            <li class="sub-nav-item">
+                                <a href="#" class="sub-nav-link">История</a>
+                            </li>
+                            <li class="sub-nav-item">
+                                <a href="#" class="sub-nav-link">Команда</a>
+                            </li>
+                            <li class="sub-nav-item">
+                                <a href="#" class="sub-nav-link">Вакансии</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <span class="nav-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                                </svg>
+                            </span>
+                            Услуги
+                        </a>
+                        <ul class="sub-nav">
+                            <li class="sub-nav-item">
+                                <a href="#" class="sub-nav-link">Разработка</a>
+                            </li>
+                            <li class="sub-nav-item">
+                                <a href="#" class="sub-nav-link">Дизайн</a>
+                            </li>
+                            <li class="sub-nav-item">
+                                <a href="#" class="sub-nav-link">Консультации</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <h2 class="section-title">Дополнительное меню</h2>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <span class="nav-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                                </svg>
+                            </span>
+                            Блог
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <span class="nav-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                </svg>
+                            </span>
+                            Контакты
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <span class="nav-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 20h9"></path>
+                                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                                </svg>
+                            </span>
+                            Поддержка
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="nav-visual">
+            <h2 class="visual-title">Визуальное представление структуры</h2>
+            <div class="visual-container">
+                <div class="tree-structure">
+                    <div class="tree-node">Главная</div>
+                    <div class="tree-branch">
+                        <div class="tree-node">О компании</div>
+                        <div class="tree-node">Услуги</div>
+                        <div class="tree-node">Блог</div>
+                    </div>
+                    <div class="tree-branch">
+                        <div class="tree-subnode">История</div>
+                        <div class="tree-subnode">Команда</div>
+                        <div class="tree-subnode">Вакансии</div>
+                        <div class="tree-subnode">Разработка</div>
+                        <div class="tree-subnode">Дизайн</div>
+                        <div class="tree-subnode">Консультации</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

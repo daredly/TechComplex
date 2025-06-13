@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Система уведомлений - TechComplex</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .notifications-demo {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .notification-center {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .notification-title {
+            font-size: 24px;
+            color: #2C3E50;
+        }
+
+        .notification-count {
+            background: #E74C3C;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        .notification-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .notification-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            transition: background 0.3s;
+        }
+
+        .notification-item:hover {
+            background: #f1f3f5;
+        }
+
+        .notification-item.unread {
+            background: #e3f2fd;
+        }
+
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .icon-success {
+            background: #2ECC71;
+            color: white;
+        }
+
+        .icon-warning {
+            background: #F1C40F;
+            color: white;
+        }
+
+        .icon-error {
+            background: #E74C3C;
+            color: white;
+        }
+
+        .icon-info {
+            background: #3498DB;
+            color: white;
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-title {
+            font-weight: 600;
+            color: #2C3E50;
+            margin-bottom: 5px;
+        }
+
+        .notification-text {
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .notification-time {
+            font-size: 0.9em;
+            color: #999;
+        }
+
+        .notification-actions {
+            display: flex;
+            gap: 10px;
+            margin-left: 15px;
+        }
+
+        .notification-button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        .button-primary {
+            background: #3498DB;
+            color: white;
+        }
+
+        .button-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .notification-filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .filter-button {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-button.active {
+            background: #3498DB;
+            color: white;
+            border-color: #3498DB;
+        }
+
+        .notification-empty {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="notifications-demo">
+        <div class="notification-center">
+            <div class="notification-header">
+                <h1 class="notification-title">Уведомления</h1>
+                <span class="notification-count">3 новых</span>
+            </div>
+
+            <div class="notification-filters">
+                <button class="filter-button active">Все</button>
+                <button class="filter-button">Непрочитанные</button>
+                <button class="filter-button">Важные</button>
+                <button class="filter-button">Системные</button>
+            </div>
+
+            <div class="notification-list">
+                <!-- Новый заказ -->
+                <div class="notification-item unread">
+                    <div class="notification-icon icon-success">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-title">Новый заказ</div>
+                        <div class="notification-text">Иван Петров оформил заказ на разработку сайта</div>
+                        <div class="notification-time">5 минут назад</div>
+                    </div>
+                    <div class="notification-actions">
+                        <button class="notification-button button-primary">Просмотреть</button>
+                        <button class="notification-button button-secondary">Отметить как прочитанное</button>
+                    </div>
+                </div>
+
+                <!-- Системное уведомление -->
+                <div class="notification-item unread">
+                    <div class="notification-icon icon-info">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-title">Обновление системы</div>
+                        <div class="notification-text">Доступно обновление системы до версии 2.1.0</div>
+                        <div class="notification-time">1 час назад</div>
+                    </div>
+                    <div class="notification-actions">
+                        <button class="notification-button button-primary">Обновить</button>
+                        <button class="notification-button button-secondary">Отложить</button>
+                    </div>
+                </div>
+
+                <!-- Предупреждение -->
+                <div class="notification-item unread">
+                    <div class="notification-icon icon-warning">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                            <line x1="12" y1="9" x2="12" y2="13"></line>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-title">Низкий баланс</div>
+                        <div class="notification-text">На вашем счете осталось менее 1000 рублей</div>
+                        <div class="notification-time">2 часа назад</div>
+                    </div>
+                    <div class="notification-actions">
+                        <button class="notification-button button-primary">Пополнить</button>
+                        <button class="notification-button button-secondary">Отметить как прочитанное</button>
+                    </div>
+                </div>
+
+                <!-- Ошибка -->
+                <div class="notification-item">
+                    <div class="notification-icon icon-error">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="15" y1="9" x2="9" y2="15"></line>
+                            <line x1="9" y1="9" x2="15" y2="15"></line>
+                        </svg>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-title">Ошибка синхронизации</div>
+                        <div class="notification-text">Не удалось синхронизировать данные с сервером</div>
+                        <div class="notification-time">Вчера в 15:30</div>
+                    </div>
+                    <div class="notification-actions">
+                        <button class="notification-button button-primary">Повторить</button>
+                        <button class="notification-button button-secondary">Игнорировать</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation - TechComplex</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .api-docs {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .docs-header {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .docs-title {
+            font-size: 24px;
+            color: #2C3E50;
+            margin-bottom: 20px;
+        }
+
+        .docs-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .endpoints-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .endpoint-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .endpoint-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .method-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: white;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+
+        .method-get { background: #3498DB; }
+        .method-post { background: #2ECC71; }
+        .method-put { background: #F1C40F; }
+        .method-delete { background: #E74C3C; }
+
+        .endpoint-path {
+            font-family: monospace;
+            color: #2C3E50;
+            font-size: 1.1em;
+        }
+
+        .endpoint-description {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .endpoint-section {
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-weight: 500;
+            color: #2C3E50;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+
+        .code-block {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+            color: #2C3E50;
+            margin-bottom: 10px;
+        }
+
+        .params-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+
+        .params-table th,
+        .params-table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .params-table th {
+            color: #2C3E50;
+            font-weight: 500;
+        }
+
+        .params-table td {
+            color: #666;
+        }
+
+        .type-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: #e9ecef;
+            color: #666;
+            font-size: 0.85em;
+        }
+
+        .response-example {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        .response-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #2C3E50;
+            font-size: 0.9em;
+        }
+
+        .status-badge {
+            padding: 2px 8px;
+            border-radius: 12px;
+            background: #2ECC71;
+            color: white;
+            font-size: 0.85em;
+        }
+
+        .legend {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        .legend-text {
+            color: #2C3E50;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="api-docs">
+        <div class="docs-header">
+            <h1 class="docs-title">API Documentation</h1>
+            <p class="docs-description">
+                Детальная схема API endpoints для взаимодействия между фронтендом и бэкендом
+            </p>
+        </div>
+
+        <div class="endpoints-container">
+            <!-- Аутентификация -->
+            <div class="endpoint-card">
+                <div class="endpoint-header">
+                    <span class="method-badge method-post">POST</span>
+                    <span class="endpoint-path">/api/auth/login</span>
+                </div>
+                <div class="endpoint-description">
+                    Аутентификация пользователя и получение JWT токена
+                </div>
+                <div class="endpoint-section">
+                    <div class="section-title">Параметры запроса</div>
+                    <table class="params-table">
+                        <tr>
+                            <th>Параметр</th>
+                            <th>Тип</th>
+                            <th>Обязательный</th>
+                        </tr>
+                        <tr>
+                            <td>email</td>
+                            <td><span class="type-badge">string</span></td>
+                            <td>Да</td>
+                        </tr>
+                        <tr>
+                            <td>password</td>
+                            <td><span class="type-badge">string</span></td>
+                            <td>Да</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="endpoint-section">
+                    <div class="section-title">Пример ответа</div>
+                    <div class="response-example">
+                        <div class="response-header">
+                            <span>Status: 200 OK</span>
+                            <span class="status-badge">Success</span>
+                        </div>
+                        <div class="code-block">
+{
+    "token": "eyJhbGciOiJIUzI1NiIs...",
+    "user": {
+        "id": 1,
+        "email": "user@example.com",
+        "name": "John Doe"
+    }
+}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Профиль пользователя -->
+            <div class="endpoint-card">
+                <div class="endpoint-header">
+                    <span class="method-badge method-get">GET</span>
+                    <span class="endpoint-path">/api/users/profile</span>
+                </div>
+                <div class="endpoint-description">
+                    Получение профиля текущего пользователя
+                </div>
+                <div class="endpoint-section">
+                    <div class="section-title">Заголовки</div>
+                    <table class="params-table">
+                        <tr>
+                            <th>Заголовок</th>
+                            <th>Значение</th>
+                        </tr>
+                        <tr>
+                            <td>Authorization</td>
+                            <td>Bearer {token}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="endpoint-section">
+                    <div class="section-title">Пример ответа</div>
+                    <div class="response-example">
+                        <div class="response-header">
+                            <span>Status: 200 OK</span>
+                            <span class="status-badge">Success</span>
+                        </div>
+                        <div class="code-block">
+{
+    "id": 1,
+    "email": "user@example.com",
+    "name": "John Doe",
+    "role": "user",
+    "createdAt": "2024-01-01T00:00:00Z"
+}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Обновление профиля -->
+            <div class="endpoint-card">
+                <div class="endpoint-header">
+                    <span class="method-badge method-put">PUT</span>
+                    <span class="endpoint-path">/api/users/profile</span>
+                </div>
+                <div class="endpoint-description">
+                    Обновление данных профиля пользователя
+                </div>
+                <div class="endpoint-section">
+                    <div class="section-title">Параметры запроса</div>
+                    <table class="params-table">
+                        <tr>
+                            <th>Параметр</th>
+                            <th>Тип</th>
+                            <th>Обязательный</th>
+                        </tr>
+                        <tr>
+                            <td>name</td>
+                            <td><span class="type-badge">string</span></td>
+                            <td>Нет</td>
+                        </tr>
+                        <tr>
+                            <td>email</td>
+                            <td><span class="type-badge">string</span></td>
+                            <td>Нет</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="endpoint-section">
+                    <div class="section-title">Пример ответа</div>
+                    <div class="response-example">
+                        <div class="response-header">
+                            <span>Status: 200 OK</span>
+                            <span class="status-badge">Success</span>
+                        </div>
+                        <div class="code-block">
+{
+    "id": 1,
+    "email": "new@example.com",
+    "name": "John Smith",
+    "role": "user",
+    "updatedAt": "2024-01-02T00:00:00Z"
+}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Удаление аккаунта -->
+            <div class="endpoint-card">
+                <div class="endpoint-header">
+                    <span class="method-badge method-delete">DELETE</span>
+                    <span class="endpoint-path">/api/users/profile</span>
+                </div>
+                <div class="endpoint-description">
+                    Удаление аккаунта пользователя
+                </div>
+                <div class="endpoint-section">
+                    <div class="section-title">Заголовки</div>
+                    <table class="params-table">
+                        <tr>
+                            <th>Заголовок</th>
+                            <th>Значение</th>
+                        </tr>
+                        <tr>
+                            <td>Authorization</td>
+                            <td>Bearer {token}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="endpoint-section">
+                    <div class="section-title">Пример ответа</div>
+                    <div class="response-example">
+                        <div class="response-header">
+                            <span>Status: 200 OK</span>
+                            <span class="status-badge">Success</span>
+                        </div>
+                        <div class="code-block">
+{
+    "message": "Account successfully deleted"
+}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background: #3498DB;"></div>
+                <span class="legend-text">GET</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #2ECC71;"></div>
+                <span class="legend-text">POST</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #F1C40F;"></div>
+                <span class="legend-text">PUT</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #E74C3C;"></div>
+                <span class="legend-text">DELETE</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

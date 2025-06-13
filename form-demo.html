@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Демонстрация форм - TechComplex</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .form-demo {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .form-states {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .form-state {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .form-state h3 {
+            margin-bottom: 20px;
+            color: #2C3E50;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #2C3E50;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #3498DB;
+            outline: none;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+
+        .form-group input.error,
+        .form-group select.error,
+        .form-group textarea.error {
+            border-color: #E74C3C;
+        }
+
+        .error-message {
+            color: #E74C3C;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .success-message {
+            background-color: #2ECC71;
+            color: white;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+
+        .button {
+            background-color: #3498DB;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #2980B9;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-demo">
+        <h1>Демонстрация форм обратной связи</h1>
+        
+        <div class="form-states">
+            <!-- Обычное состояние формы -->
+            <div class="form-state">
+                <h3>Обычное состояние</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Имя *</label>
+                        <input type="text" id="name" placeholder="Введите ваше имя">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" placeholder="Введите ваш email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Сообщение *</label>
+                        <textarea id="message" rows="4" placeholder="Введите ваше сообщение"></textarea>
+                    </div>
+                    <button type="submit" class="button">Отправить</button>
+                </form>
+            </div>
+
+            <!-- Состояние с ошибкой -->
+            <div class="form-state">
+                <h3>Состояние с ошибкой</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="name-error">Имя *</label>
+                        <input type="text" id="name-error" class="error" value="И">
+                        <div class="error-message">Имя должно содержать минимум 2 символа</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email-error">Email *</label>
+                        <input type="email" id="email-error" class="error" value="invalid-email">
+                        <div class="error-message">Введите корректный email адрес</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-error">Сообщение *</label>
+                        <textarea id="message-error" rows="4" class="error"></textarea>
+                        <div class="error-message">Поле обязательно для заполнения</div>
+                    </div>
+                    <button type="submit" class="button">Отправить</button>
+                </form>
+            </div>
+
+            <!-- Состояние успешной отправки -->
+            <div class="form-state">
+                <h3>Успешная отправка</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="name-success">Имя *</label>
+                        <input type="text" id="name-success" value="Иван Иванов" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="email-success">Email *</label>
+                        <input type="email" id="email-success" value="ivan@example.com" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-success">Сообщение *</label>
+                        <textarea id="message-success" rows="4" disabled>Спасибо за вашу работу!</textarea>
+                    </div>
+                    <div class="success-message">
+                        Сообщение успешно отправлено! Мы свяжемся с вами в ближайшее время.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

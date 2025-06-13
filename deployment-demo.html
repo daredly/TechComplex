@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deployment Process - TechComplex</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .deployment-demo {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .deployment-header {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .deployment-title {
+            font-size: 24px;
+            color: #2C3E50;
+            margin-bottom: 20px;
+        }
+
+        .deployment-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .deployment-flow {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .flow-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .flow-stage {
+            display: flex;
+            gap: 30px;
+            position: relative;
+        }
+
+        .flow-stage:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 50px;
+            bottom: -40px;
+            width: 2px;
+            height: 40px;
+            background: #e9ecef;
+        }
+
+        .stage-icon {
+            width: 100px;
+            height: 100px;
+            background: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stage-icon svg {
+            width: 40px;
+            height: 40px;
+            color: #3498DB;
+        }
+
+        .stage-content {
+            flex-grow: 1;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .stage-title {
+            font-size: 1.2em;
+            color: #2C3E50;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .stage-description {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .stage-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .step-card {
+            background: white;
+            border-radius: 6px;
+            padding: 15px;
+            border: 1px solid #e9ecef;
+        }
+
+        .step-title {
+            color: #2C3E50;
+            font-weight: 500;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .step-title svg {
+            width: 16px;
+            height: 16px;
+            color: #3498DB;
+        }
+
+        .step-description {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .automation-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: #2ECC71;
+            color: white;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+
+        .monitoring-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: #F1C40F;
+            color: white;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+
+        .security-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: #E74C3C;
+            color: white;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="deployment-demo">
+        <div class="deployment-header">
+            <h1 class="deployment-title">Процесс деплоя</h1>
+            <p class="deployment-description">
+                Визуальное представление процесса деплоя сайта, включающее этапы настройки сервера, развертывания приложения и настройки мониторинга
+            </p>
+        </div>
+
+        <div class="deployment-flow">
+            <div class="flow-container">
+                <!-- Подготовка сервера -->
+                <div class="flow-stage">
+                    <div class="stage-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                    <div class="stage-content">
+                        <div class="stage-title">
+                            Подготовка сервера
+                            <span class="automation-badge">Автоматизировано</span>
+                        </div>
+                        <div class="stage-description">
+                            Настройка инфраструктуры и подготовка серверного окружения
+                        </div>
+                        <div class="stage-steps">
+                            <div class="step-card">
+                                <div class="step-title">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                                    </svg>
+                                    Настройка AWS
+                                </div>
+                                <div class="step-description">
+                                    Создание и настройка EC2 инстансов, настройка VPC и групп безопасности
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-title">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                                    </svg>
+                                    Установка Docker
+                                </div>
+                                <div class="step-description">
+                                    Установка и настройка Docker для контейнеризации приложения
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-title">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                    </svg>
+                                    Настройка Nginx
+                                </div>
+                                <div class="step-description">
+                                    Настройка веб-сервера и SSL-сертификатов
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Развертывание приложения -->
+                <div class="flow-stage">
+                    <div class="stage-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                        </svg>
+                    </div>
+                    <div class="stage-content">
+                        <div class="stage-title">
+                            Развертывание приложения
+                            <span class="automation-badge">CI/CD</span>
+                        </div>
+                        <div class="stage-description">
+                            Автоматизированное развертывание приложения с использованием CI/CD
+                        </div>
+                        <div class="stage-steps">
+                            <div class="step-card">
+                                <div class="step-title">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                                    </svg>
+                                    Сборка
+                                </div>
+                                <div class="step-description">
+                                    Сборка Docker-образов и проверка зависимостей
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-title">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                                    </svg>
+                                    Деплой
+                                </div>
+                                <div class="step-description">
+                                    Развертывание контейнеров и обновление конфигурации
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-title">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    Валидация
+                                </div>
+                                <div class="step-description">
+                                    Проверка работоспособности и автоматические тесты
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Мониторинг и поддержка -->
+                <div class="flow-stage">
+                    <div class="stage-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <div class="stage-content">
+                        <div class="stage-title">
+                            Мониторинг и поддержка
+                            <span class="monitoring-badge">Мониторинг</span>
+                        </div>
+                        <div class="stage-description">
+                            Настройка систем мониторинга и обеспечения непрерывной доступности
+                        </div>
+                        <div class="stage-steps">
+                            <div class="step-card">
+                                <div class="step-title">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                    </svg>
+                                    Prometheus
+                                </div>
+                                <div class="step-description">
+                                    Настройка сбора метрик и алертинга
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-title">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                    Grafana
+                                </div>
+                                <div class="step-description">
+                                    Визуализация метрик и создание дашбордов
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-title">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    Uptime
+                                </div>
+                                <div class="step-description">
+                                    Мониторинг доступности и производительности
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
