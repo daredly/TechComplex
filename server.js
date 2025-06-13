@@ -21,6 +21,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Настройка парсеров
+app.use(express.json()); // для application/json
+app.use(express.urlencoded({ extended: true })); // для application/x-www-form-urlencoded
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -83,7 +85,9 @@ app.use((err, req, res, next) => {
 // Маршруты
 app.post('/api/orders', async (req, res) => {
     try {
-        // Валидация данных
+        console.log('Received order request:', req.body); // для отладки
+
+        // Проверка наличия всех обязательных полей
         const requiredFields = ['name', 'surname', 'email', 'phone', 'service'];
         const missingFields = requiredFields.filter(field => !req.body[field]);
         
@@ -94,9 +98,11 @@ app.post('/api/orders', async (req, res) => {
             });
         }
 
+        const { name, surname, email, phone, service, company, message } = req.body;
+
         // Валидация email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(req.body.email)) {
+        if (!emailRegex.test(email)) {
             return res.status(400).json({
                 success: false,
                 message: 'Некорректный формат email'
@@ -105,14 +111,25 @@ app.post('/api/orders', async (req, res) => {
 
         // Валидация телефона
         const phoneRegex = /^\+?[\d\s-]{10,}$/;
-        if (!phoneRegex.test(req.body.phone)) {
+        if (!phoneRegex.test(phone)) {
             return res.status(400).json({
                 success: false,
                 message: 'Некорректный формат телефона'
             });
         }
 
-        const order = new Order(req.body);
+        // Создание и сохранение заказа
+        const order = new Order({
+            name,
+            surname,
+            email,
+            phone,
+            service,
+            company,
+            message,
+            createdAt: new Date()
+        });
+
         await order.save();
         
         // Отправка уведомления в Telegram
@@ -126,45 +143,62 @@ app.post('/api/orders', async (req, res) => {
         });
     } catch (error) {
         console.error('Order creation error:', error);
-        res.status(400).json({
+        res.status(500).json({
             success: false,
             message: 'Ошибка при создании заказа',
-            error: error.message
+            error: process.env.NODE_ENV === 'development' ? error.message : undefined
         });
     }
 });
 
 app.post('/api/contact', async (req, res) => {
     try {
-        // Валидация данных
-        const requiredFields = ['name', 'email', 'message'];
-        const missingFields = requiredFields.filter(field => !req.body[field]);
+        console.log('Received contact request:', req.body); // для отладки
+
+        // Проверка наличия всех полей
+        const { name, email, message } = req.body;
         
-        if (missingFields.length > 0) {
+        if (!name || !email || !message) {
             return res.status(400).json({
                 success: false,
-                message: `Отсутствуют обязательные поля: ${missingFields.join(', ')}`
+                message: 'Все поля обязательны для заполнения'
             });
         }
 
-        const contact = new Contact(req.body);
+        // Валидация email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({
+                success: false,
+                message: 'Некорректный формат email'
+            });
+        }
+
+        // Создание и сохранение контакта
+        const contact = new Contact({
+            name,
+            email,
+            message,
+            createdAt: new Date()
+        });
+
         await contact.save();
         
         // Отправка уведомления в Telegram
-        const notificationSent = await sendTelegramNotification(req.body, 'contact');
+        const notificationSent = await sendTelegramNotification({ name, email, message }, 'contact');
         
         res.status(201).json({
             success: true,
-            message: 'Message sent successfully',
+            message: 'Сообщение успешно отправлено',
             contact,
             notificationSent
         });
     } catch (error) {
         console.error('Contact message error:', error);
-        res.status(400).json({
+        res.status(500).json({
             success: false,
             message: 'Ошибка при отправке сообщения',
-            error: error.message
+            error: process.env.NODE_ENV === 'development' ? error.message : undefined
         });
     }
 });
