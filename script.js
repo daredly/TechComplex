@@ -132,11 +132,56 @@ async function handleOrderSubmit(event) {
     }
 }
 
+// Функция для быстрого заказа
+async function handleQuickOrder(event) {
+    event.preventDefault();
+    const form = event.target;
+    const submitButton = form.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.textContent;
+
+    try {
+        // Блокируем кнопку и показываем загрузку
+        submitButton.disabled = true;
+        submitButton.textContent = 'Отправка...';
+
+        // Собираем данные формы
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        // Отправляем запрос
+        const response = await fetch('/api/quick-order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.message || 'Ошибка при отправке быстрого заказа');
+        }
+
+        // Показываем успешное сообщение
+        alert('Быстрый заказ успешно создан!');
+        form.reset();
+    } catch (error) {
+        console.error('Error:', error);
+        alert(error.message || 'Произошла ошибка при отправке быстрого заказа');
+    } finally {
+        // Восстанавливаем кнопку
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText;
+    }
+}
+
 // Добавляем обработчики событий при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
     // Находим формы
     const contactForm = document.getElementById('contactForm');
     const orderForm = document.getElementById('orderForm');
+    const quickOrderForm = document.getElementById('quickOrderForm');
 
     // Добавляем обработчики
     if (contactForm) {
@@ -145,5 +190,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (orderForm) {
         orderForm.addEventListener('submit', handleOrderSubmit);
+    }
+
+    if (quickOrderForm) {
+        quickOrderForm.addEventListener('submit', handleQuickOrder);
     }
 }); 

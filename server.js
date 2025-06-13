@@ -231,6 +231,64 @@ app.get('/api/contacts', async (req, res) => {
     }
 });
 
+// Добавляем обработчик быстрого заказа
+app.post('/api/quick-order', async (req, res) => {
+    try {
+        console.log('Received quick order request:', req.body);
+
+        // Проверка наличия всех обязательных полей
+        const { name, phone, service } = req.body;
+        
+        if (!name || !phone || !service) {
+            return res.status(400).json({
+                success: false,
+                message: 'Все поля обязательны для заполнения'
+            });
+        }
+
+        // Валидация телефона
+        const phoneRegex = /^\+?[\d\s-]{10,}$/;
+        if (!phoneRegex.test(phone)) {
+            return res.status(400).json({
+                success: false,
+                message: 'Некорректный формат телефона'
+            });
+        }
+
+        // Создание и сохранение быстрого заказа
+        const quickOrder = new Order({
+            name,
+            phone,
+            service,
+            createdAt: new Date()
+        });
+
+        await quickOrder.save();
+        
+        // Отправка уведомления в Telegram
+        const notificationSent = await sendTelegramNotification({
+            name,
+            phone,
+            service,
+            type: 'quick-order'
+        }, 'order');
+        
+        res.status(201).json({
+            success: true,
+            message: 'Быстрый заказ успешно создан',
+            order: quickOrder,
+            notificationSent
+        });
+    } catch (error) {
+        console.error('Quick order creation error:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Ошибка при создании быстрого заказа',
+            error: process.env.NODE_ENV === 'development' ? error.message : undefined
+        });
+    }
+});
+
 // Добавляем обработку корневого маршрута
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
