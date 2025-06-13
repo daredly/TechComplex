@@ -44,6 +44,20 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Функция для проверки ответа
+async function checkResponse(response) {
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Сервер вернул неверный формат данных');
+    }
+
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.message || 'Произошла ошибка при выполнении запроса');
+    }
+    return data;
+}
+
 // Функция для отправки контактной формы
 async function handleContactSubmit(event) {
     event.preventDefault();
@@ -64,16 +78,13 @@ async function handleContactSubmit(event) {
         const response = await fetch('/api/contact', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             },
             body: JSON.stringify(data)
         });
 
-        const result = await response.json();
-
-        if (!response.ok) {
-            throw new Error(result.message || 'Ошибка при отправке формы');
-        }
+        const result = await checkResponse(response);
 
         // Показываем успешное сообщение
         alert('Сообщение успешно отправлено!');
@@ -108,16 +119,13 @@ async function handleOrderSubmit(event) {
         const response = await fetch('/api/orders', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             },
             body: JSON.stringify(data)
         });
 
-        const result = await response.json();
-
-        if (!response.ok) {
-            throw new Error(result.message || 'Ошибка при отправке заказа');
-        }
+        const result = await checkResponse(response);
 
         // Показываем успешное сообщение
         alert('Заказ успешно создан!');
@@ -152,16 +160,13 @@ async function handleQuickOrder(event) {
         const response = await fetch('/api/quick-order', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             },
             body: JSON.stringify(data)
         });
 
-        const result = await response.json();
-
-        if (!response.ok) {
-            throw new Error(result.message || 'Ошибка при отправке быстрого заказа');
-        }
+        const result = await checkResponse(response);
 
         // Показываем успешное сообщение
         alert('Быстрый заказ успешно создан!');

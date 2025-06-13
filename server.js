@@ -20,9 +20,20 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+// Middleware для проверки Content-Type
+app.use((req, res, next) => {
+    if (req.method === 'POST' && !req.is('application/json')) {
+        return res.status(400).json({
+            success: false,
+            message: 'Content-Type должен быть application/json'
+        });
+    }
+    next();
+});
+
 // Настройка парсеров
-app.use(express.json()); // для application/json
-app.use(express.urlencoded({ extended: true })); // для application/x-www-form-urlencoded
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -72,13 +83,31 @@ async function sendTelegramNotification(data, type) {
     }
 }
 
-// Middleware для обработки ошибок
+// Обновляем обработку ошибок
 app.use((err, req, res, next) => {
     console.error('Error:', err);
-    res.status(err.status || 500).json({
+    
+    // Проверяем, является ли ответ уже отправленным
+    if (res.headersSent) {
+        return next(err);
+    }
+
+    // Определяем статус ошибки
+    const status = err.status || 500;
+    
+    // Отправляем JSON ответ
+    res.status(status).json({
         success: false,
         message: err.message || 'Внутренняя ошибка сервера',
         error: process.env.NODE_ENV === 'development' ? err : {}
+    });
+});
+
+// Обработка 404
+app.use((req, res) => {
+    res.status(404).json({
+        success: false,
+        message: 'Маршрут не найден'
     });
 });
 
