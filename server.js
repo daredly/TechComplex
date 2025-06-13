@@ -10,15 +10,25 @@ const Contact = require('./models/Contact');
 
 const app = express();
 
-// Настройка Telegram бота
-const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: false });
+// Настройка CORS
+const corsOptions = {
+    origin: ['https://*.onrender.com', 'http://localhost:3000'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+};
 
-// Middleware
-app.use(cors());
+app.use(cors(corsOptions));
+
+// Настройка парсеров
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Настройка статических файлов
 app.use(express.static(path.join(__dirname)));
+
+// Настройка Telegram бота
+const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: false });
 
 // Подключение к MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
@@ -62,11 +72,11 @@ async function sendTelegramNotification(data, type) {
 
 // Middleware для обработки ошибок
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({
+    console.error('Error:', err);
+    res.status(err.status || 500).json({
         success: false,
-        message: 'Внутренняя ошибка сервера',
-        error: process.env.NODE_ENV === 'development' ? err.message : undefined
+        message: err.message || 'Внутренняя ошибка сервера',
+        error: process.env.NODE_ENV === 'development' ? err : {}
     });
 });
 
@@ -81,6 +91,24 @@ app.post('/api/orders', async (req, res) => {
             return res.status(400).json({
                 success: false,
                 message: `Отсутствуют обязательные поля: ${missingFields.join(', ')}`
+            });
+        }
+
+        // Валидация email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(req.body.email)) {
+            return res.status(400).json({
+                success: false,
+                message: 'Некорректный формат email'
+            });
+        }
+
+        // Валидация телефона
+        const phoneRegex = /^\+?[\d\s-]{10,}$/;
+        if (!phoneRegex.test(req.body.phone)) {
+            return res.status(400).json({
+                success: false,
+                message: 'Некорректный формат телефона'
             });
         }
 
