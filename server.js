@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const path = require('path');
 const TelegramBot = require('node-telegram-bot-api');
 const Order = require('./models/Order');
 const Contact = require('./models/Contact');
@@ -15,7 +16,9 @@ const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: false });
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static('public'));
+
+// Настройка статических файлов
+app.use(express.static(path.join(__dirname)));
 
 // Подключение к MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
@@ -164,6 +167,16 @@ app.get('/api/contacts', async (req, res) => {
             error: error.message
         });
     }
+});
+
+// Добавляем обработку корневого маршрута
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Обработка всех остальных маршрутов
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Запуск сервера
